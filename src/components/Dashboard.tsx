@@ -83,6 +83,11 @@ export function Dashboard() {
     await mutate({ op: "delete", collection, id });
   }
 
+  function goTab(k: TabKey) {
+    setTab(k);
+    if (typeof window !== "undefined") window.scrollTo({ top: 0 });
+  }
+
   const counts = useMemo(
     () => ({
       timeline: data.stays.length + data.flights.length,
@@ -151,7 +156,7 @@ export function Dashboard() {
   }
 
   return (
-    <div className="mx-auto max-w-4xl px-4 pb-24 pt-6 sm:pt-10">
+    <div className="mx-auto max-w-4xl px-4 pb-28 pt-[calc(1.5rem+env(safe-area-inset-top))] sm:pb-16 sm:pt-10">
       {/* Header */}
       <header className="mb-6">
         <div className="flex items-start justify-between gap-3">
@@ -191,15 +196,15 @@ export function Dashboard() {
         )}
       </header>
 
-      {/* Tabs */}
-      <div className="sticky top-0 z-10 -mx-4 mb-5 border-b px-4 py-2" style={{ background: "var(--bg)" }}>
+      {/* Tabs — top on desktop, bottom bar on mobile (see nav below) */}
+      <div className="hidden sm:block sticky top-0 z-10 -mx-4 mb-5 border-b px-4 py-2" style={{ background: "var(--bg)" }}>
         <div className="flex gap-1 overflow-x-auto">
           {TABS.map((t) => {
             const active = tab === t.key;
             return (
               <button
                 key={t.key}
-                onClick={() => setTab(t.key)}
+                onClick={() => goTab(t.key)}
                 className="flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition"
                 style={{
                   background: active ? "var(--accent)" : "transparent",
@@ -305,6 +310,41 @@ export function Dashboard() {
           onCancel={() => setTripModal(false)}
         />
       </Modal>
+
+      {/* Mobile bottom tab bar — native-app style */}
+      <nav
+        className="fixed inset-x-0 bottom-0 z-30 flex border-t sm:hidden"
+        style={{
+          background: "var(--surface)",
+          paddingBottom: "env(safe-area-inset-bottom)",
+          boxShadow: "0 -1px 10px rgba(0,0,0,0.05)",
+        }}
+      >
+        {TABS.map((t) => {
+          const active = tab === t.key;
+          return (
+            <button
+              key={t.key}
+              onClick={() => goTab(t.key)}
+              className="relative flex flex-1 flex-col items-center gap-0.5 py-2 pt-2.5"
+              style={{ color: active ? "var(--accent)" : "var(--text-muted)" }}
+            >
+              <span className="text-lg leading-none">{t.icon}</span>
+              <span className="text-[10px] font-medium leading-none">
+                {t.label}
+              </span>
+              {counts[t.key] > 0 && (
+                <span
+                  className="absolute right-[18%] top-1 grid h-4 min-w-4 place-items-center rounded-full px-1 text-[9px] font-semibold text-white"
+                  style={{ background: "var(--accent)" }}
+                >
+                  {counts[t.key]}
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </nav>
     </div>
   );
 }

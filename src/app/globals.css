@@ -64,6 +64,11 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* No blue flash when tapping buttons/links — reads as a native app. */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
   background: var(--bg);
   color: var(--text);
