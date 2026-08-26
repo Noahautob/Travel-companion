@@ -27,6 +27,11 @@ export async function proxy(req: NextRequest) {
 }
 
 export const config = {
-  // Run on everything except Next internals and static assets.
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  // Run on everything except Next internals, and the PUBLIC files iOS/browsers
+  // fetch without a login cookie: the home-screen icons and the web manifest.
+  // These hold no trip data, so gating them just breaks the icon and install.
+  // (Photos stay gated — they're served through /api/photos.)
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|apple-touch-icon.png|icon-192.png|icon-512.png|manifest.webmanifest).*)",
+  ],
 };
