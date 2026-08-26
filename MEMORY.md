@@ -26,6 +26,23 @@ Why: app runs locally with zero setup; production uses Blob automatically.
 **Decided: forms/cards driven by a field schema (src/lib/schema.ts).**
 Why: five record types, one generic form + tailored cards. Less code, consistent.
 
+## 2026-08-26 — Deployed to production
+
+- **Live URL:** https://travel-companion-henna.vercel.app
+- Vercel project: `noah-5012s-projects/travel-companion` (Pro plan — Noah upgraded
+  from Hobby because the account-wide Blob usage limit had suspended all his stores;
+  Hobby has no pay-per-use escape, it's a 30-day lockout).
+- Blob store: `trip-tracker` (store_hRrud7jbSm2tbkDH, private, iad1), connected to
+  all environments → sets BLOB_READ_WRITE_TOKEN.
+- Env vars set (Production + Development): APP_PASSWORD, AUTH_SECRET.
+  Preview env vars NOT set yet — a CLI quirk blocked the non-interactive add;
+  only matters if GitHub preview deploys get enabled later.
+- APP_PASSWORD was set to a generated TEMPORARY password and handed to Noah to
+  change. AUTH_SECRET is a generated random signing key.
+- GitHub repo (Noahautob/Travel-companion) is pushed but NOT connected to Vercel
+  for auto-deploy (the CLI auto-connect failed). Deploys are manual via CLI for now.
+- Verified live: login gate, Blob write (add record), photo upload + private stream.
+
 **Next-version notes / not done yet:**
 - No CSV/PDF export.
 - No sharing with travel companions (would need real accounts).
