@@ -163,7 +163,7 @@ export function Dashboard() {
               <h1 className="truncate text-2xl font-bold tracking-tight sm:text-3xl">
                 {data.trip.name}
               </h1>
-              <span className="text-sm opacity-0 transition group-hover:opacity-60">
+              <span className="text-sm opacity-40 transition sm:opacity-0 sm:group-hover:opacity-60">
                 ✎
               </span>
             </button>
@@ -185,7 +185,7 @@ export function Dashboard() {
           </button>
         </div>
         {data.trip.notes && (
-          <p className="mt-3 whitespace-pre-wrap text-sm" style={{ color: "var(--text-muted)" }}>
+          <p className="mt-3 whitespace-pre-wrap break-words text-sm" style={{ color: "var(--text-muted)" }}>
             {data.trip.notes}
           </p>
         )}

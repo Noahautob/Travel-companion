@@ -63,7 +63,7 @@ function Shell({
       className="group relative rounded-2xl border p-4"
       style={{ background: "var(--surface)", boxShadow: "var(--shadow)" }}
     >
-      <div className="absolute right-3 top-3 flex gap-1 opacity-0 transition group-hover:opacity-100 focus-within:opacity-100">
+      <div className="absolute right-3 top-3 flex gap-1 opacity-100 transition sm:opacity-0 sm:group-hover:opacity-100 sm:focus-within:opacity-100">
         <button
           onClick={onEdit}
           className="grid h-7 w-7 place-items-center rounded-lg text-xs transition hover:bg-[var(--surface-2)]"
@@ -90,7 +90,7 @@ function Shell({
 function Notes({ text }: { text: string }) {
   if (!text) return null;
   return (
-    <p className="mt-2 text-sm whitespace-pre-wrap" style={{ color: "var(--text-muted)" }}>
+    <p className="mt-2 text-sm whitespace-pre-wrap break-words" style={{ color: "var(--text-muted)" }}>
       {text}
     </p>
   );
