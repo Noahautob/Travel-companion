@@ -37,11 +37,25 @@ Why: five record types, one generic form + tailored cards. Less code, consistent
 - Env vars set (Production + Development): APP_PASSWORD, AUTH_SECRET.
   Preview env vars NOT set yet — a CLI quirk blocked the non-interactive add;
   only matters if GitHub preview deploys get enabled later.
-- APP_PASSWORD was set to a generated TEMPORARY password and handed to Noah to
-  change. AUTH_SECRET is a generated random signing key.
+- APP_PASSWORD: initially a generated temp password; changed to Noah's chosen
+  password on 2026-08-26 at his request (stored only as the APP_PASSWORD env var,
+  never committed). AUTH_SECRET is a generated random signing key.
 - GitHub repo (Noahautob/Travel-companion) is pushed but NOT connected to Vercel
   for auto-deploy (the CLI auto-connect failed). Deploys are manual via CLI for now.
 - Verified live: login gate, Blob write (add record), photo upload + private stream.
+
+## 2026-08-26 — Mobile pass + password change
+
+- Password changed to Noah's choice (see above).
+- **Mobile bug fixed:** card edit/delete controls + the trip-name edit pencil were
+  hover-only (`opacity-0 group-hover`), so invisible/unusable on touch. Now visible
+  by default, hover-reveal only from `sm:` up. Added `break-words` to notes.
+- **Note on the in-app preview:** its mobile-device emulation has a DPR quirk —
+  it sets the layout viewport to ~2× the visual width (innerWidth 753 vs
+  clientWidth 390), so cards *look* clipped in the preview. That's the emulator,
+  not the app: body/clientWidth measure a correct 390 and the layout is fluid
+  (max-w container, single-column, no fixed widths). Renders correctly on real
+  phones. Verified card action buttons compute opacity:1 at 390px width.
 
 **Next-version notes / not done yet:**
 - No CSV/PDF export.
