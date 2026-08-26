@@ -192,7 +192,7 @@ export function Dashboard() {
       </header>
 
       {/* Tabs */}
-      <div className="sticky top-0 z-10 -mx-4 mb-5 border-b px-4 py-2 backdrop-blur" style={{ background: "color-mix(in srgb, var(--bg) 85%, transparent)" }}>
+      <div className="sticky top-0 z-10 -mx-4 mb-5 border-b px-4 py-2" style={{ background: "var(--bg)" }}>
         <div className="flex gap-1 overflow-x-auto">
           {TABS.map((t) => {
             const active = tab === t.key;

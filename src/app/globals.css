@@ -60,11 +60,19 @@
   border-color: var(--border);
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  /* Never allow sideways scroll — it makes vertical scrolling feel sticky on
+     touch devices as the two gestures fight each other. */
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
 }
 
 /* Thin, tidy scrollbars */
